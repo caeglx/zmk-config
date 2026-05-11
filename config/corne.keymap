@@ -18,6 +18,16 @@
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
+        
+        // Layer-tap with repeat: tap-then-hold repeats the tap key
+        ltr: layer_tap_repeat {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;     // <-- this is the key part
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+        };
     };
 
     keymap {
@@ -32,7 +42,7 @@
 //              ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &kp LSHFT    &kp Z         &hm LALT X    &kp C         &kp V         &kp B             &kp N         &kp M         &kp COMMA     &hm LALT DOT  &kp FSLH      &kp ESC
 //              ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼───┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                             &lt FUN DEL   &lt NUM BSPC  &lt ACT TAB       &lt ACT RET   &lt NUM SPACE &lt FUN ESC
+                                             &ltr FUN DEL  &ltr NUM BSPC &ltr ACT TAB      &ltr ACT RET  &ltr NUM SPACE &ltr FUN ESC
 //                                          ╰─────────────┴─────────────┴─────────────┴───┴─────────────┴─────────────┴─────────────╯
             >;
         };
@@ -56,9 +66,9 @@
         act_layer {
             bindings = <
 //              ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-    &trans       &bt BT_CLR    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3      &kp HOME      &kp PG_UP     &kp PG_DN     &kp END       &trans        &trans
+    &trans       &bt BT_CLR    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3      &kp HOME      &kp PG_DN     &kp PG_UP     &kp END       &trans        &trans
 //              ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-    &trans       &trans        &trans        &trans        &trans        &trans            &kp LEFT      &kp UP        &kp DOWN      &kp RIGHT     &trans        &trans
+    &trans       &trans        &trans        &trans        &trans        &trans            &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &trans        &trans
 //              ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
     &trans       &trans        &trans        &trans        &trans        &trans            &trans        &trans        &trans        &trans        &trans        &trans
 //              ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┼───┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
